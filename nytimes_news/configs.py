@@ -4,9 +4,9 @@ from RPA.Robocorp.WorkItems import WorkItems
 
 from base_configs import environment
 
-SEARCH_TEXT = 'Covid pakistan'
-SECTIONS = ['Books', 'Business', 'New York']
-MONTHS = 30
+SEARCH_TEXT = 'test'
+SECTIONS = ['Arts',]
+MONTHS = 10
 URL = 'https://www.nytimes.com/'
 
 if environment == 'PROD':
