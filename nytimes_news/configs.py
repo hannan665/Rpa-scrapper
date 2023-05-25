@@ -33,6 +33,7 @@ XPATHS_MAPPER = {
     'specific_date_btn': '//button[@value="Specific Dates"]',
     'end_date_input': '//input[@id="endDate"]',
     'start_date_input': '//input[@id="startDate"]',
+    'cookies_accept_btn': '//button[contains(text(),"Accept")]',
 }
 PARAMS = {
     'search_text': SEARCH_TEXT,

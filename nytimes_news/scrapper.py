@@ -114,10 +114,19 @@ class NYTimesNewsScrapper(BaseScrapper):
         """
         return re.search(r'(\$[\d,]+\.\d{1,2}\b|\d+\sdollars|\d+\sUSD)', text)
 
+    def cookies_popup_accept(self):
+        try:
+            self.browser.wait_until_page_contains_element(self.get_xpath('cookies_accept_btn'))
+            self.browser.click_element_when_visible(self.get_xpath('cookies_accept_btn'))
+        except AssertionError:
+            pass
+
     def scrap_data(self):
         """
         Scrap data from web after applying all actions and steps.
         """
+
+        self.cookies_popup_accept()
         self.click_show_more_button()
 
         for element in self.browser.find_elements(self.get_xpath('search_results')):
