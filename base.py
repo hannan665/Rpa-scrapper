@@ -10,10 +10,13 @@ from RPA.Browser.Selenium import Selenium
 from RPA.Excel.Files import Files
 from RPA.HTTP import HTTP
 
-from base_configs import XPATHS_MAPPER_VARIABLE_NAME
+from base_configs import XPATHS_MAPPER_VARIABLE_NAME, DOWNLOAD_DIRECTORY
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
+
+if not os.path.exists(DOWNLOAD_DIRECTORY):
+    os.mkdir(DOWNLOAD_DIRECTORY)
 
 
 @dataclass
@@ -38,22 +41,16 @@ class ElementCallableConfig:
 @dataclass
 class BotBrowser:
     url: str
-    download_directory: str
 
     def open(self):
         """
         Initialize any available browser with RPA selenium.
         :return: selenium instance
         """
-        self._create_download_directory()
         selenium = Selenium()
-        selenium.set_download_directory(self.download_directory)
+        selenium.set_download_directory(DOWNLOAD_DIRECTORY)
         selenium.open_available_browser(url=self.url, maximized=True)
         return selenium
-
-    def _create_download_directory(self):
-        if not os.path.exists(self.download_directory):
-            os.mkdir(self.download_directory)
 
 
 @dataclass
@@ -218,19 +215,15 @@ class BaseScrapper(ABC):
         It will write data into execl file
         """
         table_data = defaultdict(list)
-        
+
         for item in self.data:
             for key, value in item:
                 table_data[key].append(value)
-                
+
         if table_data:
-            w = self.files.create_workbook(f'{self.download_directory}/results.xlsx')
+            w = self.files.create_workbook(f'{DOWNLOAD_DIRECTORY}/results.xlsx')
             w.append_worksheet("Sheet", table_data, header=True, start=1)
             w.save()
-
-    @property
-    def download_directory(self) -> str:
-        return self.import_variable('DOWNLOAD_DIRECTORY')
 
     def start_process(self) -> set:
         """

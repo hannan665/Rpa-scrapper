@@ -8,11 +8,12 @@ from dateutil.relativedelta import relativedelta
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 from base import BaseScrapper, ActionConfig, StepConfig, BotBrowser, ElementCallableConfig
-from nytimes_news.configs import URL, SEARCH_TEXT, DOWNLOAD_DIRECTORY
+from base_configs import DOWNLOAD_DIRECTORY
+from nytimes_news.configs import URL, SEARCH_TEXT
 
 
 class NYTimesNewsScrapper(BaseScrapper):
-    browser = BotBrowser(url=URL, download_directory=DOWNLOAD_DIRECTORY).open()
+    browser = BotBrowser(url=URL).open()
 
     actions_config = [
         ActionConfig(
@@ -133,7 +134,7 @@ class NYTimesNewsScrapper(BaseScrapper):
             img_link = element.find_element(By.TAG_NAME, 'img')
             image_name = urlparse(img_link.get_attribute('src')).path.split('/')[-1]
 
-            self.http.download(img_link.get_attribute('src'), target_file=self.import_variable('DOWNLOAD_DIRECTORY'))
+            self.http.download(img_link.get_attribute('src'), target_file=DOWNLOAD_DIRECTORY)
             title = element.find_element(By.TAG_NAME, 'h4').text
             description = element.find_elements(By.TAG_NAME, 'p')[1].text
 
@@ -143,7 +144,7 @@ class NYTimesNewsScrapper(BaseScrapper):
                         'title': title,
                         'description': description,
                         'date': element.find_element(By.TAG_NAME, 'span').text,
-                        'picture_name': f'{self.download_directory}/{image_name}',
+                        'picture_name': f'{DOWNLOAD_DIRECTORY}/{image_name}',
                         'search_phrase_in_title': title.count(self.search_text),
                         'search_phrase_in_description': description.count(self.search_text),
                         'is_contains_amount': any([self._check_amount(title), self._check_amount(description)])

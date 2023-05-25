@@ -3,13 +3,11 @@ import os
 from re import sub
 
 from base_configs import XPATHS_MAPPER_VARIABLE_NAME
-
 scrapper_file_content = """from base import BaseScrapper, BotBrowser, ActionConfig
-from {scrapper_name}.configs import URL, DOWNLOAD_DIRECTORY
-
+from {scrapper_name}.configs import URL
 
 class {class_name}(BaseScrapper):
-    browser = BotBrowser(url=URL, download_directory=DOWNLOAD_DIRECTORY).open()
+    browser = BotBrowser(url=URL).open()
     actions_config: list[ActionConfig] = []
     
     def __init__(self):
@@ -28,7 +26,6 @@ class {class_name}(BaseScrapper):
 config_file_content = """import os
 {XPATHS_MAPPER_VARIABLE_NAME} = {{}}  # please add xpaths 'some_name': '//input[@id=df]'
 URL = 'https://www.google.com/'  # required
-DOWNLOAD_DIRECTORY = f'{{os.getcwd()}}/{scrapper_name}/output'
 """
 
 runner_file_content = """\nfrom {scrapper_name}.scrapper import {class_name}
