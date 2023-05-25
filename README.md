@@ -10,11 +10,30 @@ This is a repository for scrapping data from websites, developed with Python [rp
 
 ## [Nytimes](https://www.nytimes.com/)
  1. **Automate Scrap the** [Nytimes](https://www.nytimes.com/)
- 3. It will search on specific filters.
+ 2. It will search on specific filters.
  4. It will download the images of the news
  5. It will scrap the news with some details and save it in execl file.
  6. Can be test on [robocorp](https://cloud.robocorp.com/)
  7. All downloaded images and Excel sheets will be land in **output** folder
+  
+  **Required WorkItmes on Robocop**:
+
+
+  Keyword | Description
+  | :--- | :---
+  search_text  | *Search phrase to insert in search field on nytimes (string value)*
+  months  | *Number of months (integer value)*
+  sections | *A list of sections (eg: ['Arts'])*
+
+  
+  **Required variables in** [nytimes-news/configs.py](https://github.com/hannan665/Rpa-scrapper/blob/master/nytimes_news/configs.py) **for local run**:
+
+  Keyword | Description
+  | :--- | :---
+  SEARCH_TEXT  | *Search phrase to insert in search field on nytimes (string value)*
+  MONTHS  | *Number of months (integer value)*
+  SECTIONS | *A list of sections (eg: ['Arts'])*
+
 
 ## Setup (using python)
 1. *pip install -r requirements.txt*
@@ -54,7 +73,7 @@ python3 create_scrapper.py new_scrapper
     Keyword | Description
     | :--- | :---
     URL  | *URL of the Website, from where data will be scrapped*
-    XPATHS_MAPPER  | *A dict for xpaths. Varaible name can be changed from  [base_config.py]((https://github.com/hannan665/Rpa-scrapper/blob/master/base_configs.py)).*
+    XPATHS_MAPPER  | *A dict for xpaths. Varaible name can be changed from  [base_config.py](https://github.com/hannan665/Rpa-scrapper/blob/master/base_configs.py).*
     DOWNLOAD_DIRECTORY | *Download directry for scrapper*
 - scrapper.py
    
