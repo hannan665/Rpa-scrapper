@@ -74,7 +74,6 @@ python3 create_scrapper.py new_scrapper
     | :--- | :---
     URL  | *URL of the Website, from where data will be scrapped*
     XPATHS_MAPPER  | *A dict for xpaths. Varaible name can be changed from  [base_config.py](https://github.com/hannan665/Rpa-scrapper/blob/master/base_configs.py).*
-    DOWNLOAD_DIRECTORY | *Download directry for scrapper*
 - scrapper.py
    
    The file will be genereated having a class with all required functions and params in it.
@@ -117,6 +116,9 @@ This file contains some base variables required in base class.
 Keyword | Description
 | :--- | :---
 XPATHS_MAPPER_NAME  | *xpath mapper varaible name*
+DOWNLOAD_DIRECTORY | *Everything will be download in this directory*
+ENVIRONMENT | *env variable will be set from robocorp, value would be "PROD"*
+
 
 
 ### [base.py](https://github.com/hannan665/Rpa-scrapper/blob/master/base.py)

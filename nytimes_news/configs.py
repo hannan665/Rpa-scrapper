@@ -1,13 +1,13 @@
 import os
 from RPA.Robocorp.WorkItems import WorkItems
-from base_configs import environment
+from base_configs import ENVIRONMENT
 
 SEARCH_TEXT = 'covid pakistan'
 SECTIONS = ['Briefing']
 MONTHS = 6
 URL = 'https://www.nytimes.com/'
 
-if environment == 'PROD':
+if ENVIRONMENT == 'PROD':
     print('Process WorkItems')
     wi = WorkItems()
     wi.get_input_work_item()
